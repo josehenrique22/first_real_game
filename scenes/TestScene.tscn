@@ -1,3 +1,33 @@
-[gd_scene format=3 uid="uid://bmg6bjfex43qr"]
+[gd_scene load_steps=5 format=3 uid="uid://bmg6bjfex43qr"]
+
+[ext_resource type="PackedScene" uid="uid://c0oxirq2clsee" path="res://scenes/BuildingBlock.tscn" id="1_2gju5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2gju5"]
+sky_top_color = Color(0.0964655, 0.477136, 0.695709, 1)
+sky_horizon_color = Color(0.549055, 0.637164, 0.691038, 1)
+ground_bottom_color = Color(0.128457, 0.129351, 0.128019, 1)
+ground_horizon_color = Color(0.549055, 0.637164, 0.691038, 1)
+
+[sub_resource type="Sky" id="Sky_rlkm5"]
+sky_material = SubResource("ProceduralSkyMaterial_2gju5")
+
+[sub_resource type="Environment" id="Environment_n77mx"]
+background_mode = 2
+sky = SubResource("Sky_rlkm5")
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="TestScene" type="Node"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0.451453, -0.462251, 0.763226, -0.214926, 0.773835, 0.595807, -8, 33, -16)
+light_color = Color(0.567675, 0.544809, 0.509833, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n77mx")
+
+[node name="BuildingBlock" parent="." instance=ExtResource("1_2gju5")]
+transform = Transform3D(40, 0, 0, 0, 0.5, 0, 0, 0, 40, 0, 0, 0)
+
+[node name="LightContainer" type="Node" parent="."]

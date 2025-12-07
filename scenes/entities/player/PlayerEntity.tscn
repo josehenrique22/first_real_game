@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpguqtvnaqir3"]
+
+[ext_resource type="Texture2D" uid="uid://cca4duhis4r5r" path="res://assets/texture/texture_06.png" id="1_plir6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u54eq"]
+albedo_texture = ExtResource("1_plir6")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3eqqu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t8csi"]
+
+[node name="PlayerEntity" type="CharacterBody3D" groups=["player"]]
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_u54eq")
+mesh = SubResource("CapsuleMesh_3eqqu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_t8csi")
+debug_color = Color(0.983399, 0, 0.353391, 0.42)
+
+[node name="TakeDamageArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TakeDamageArea"]
+shape = SubResource("CapsuleShape3D_t8csi")
+debug_color = Color(0.983399, 0, 0.353391, 0.42)
