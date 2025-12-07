@@ -1,24 +1,24 @@
 using DTOS;
 using Godot;
+using InputManagerSystem;
 
 namespace PlayerEntityComponent;
 
 public partial class MovementComponent : Node
 {
     [Export] private MovementDTO _movementDTO;
+    [Export] private InputManager _inputManager;
     public void Movement(CharacterBody3D _entity, double _delta)
     {
-        float xAxis = Input.GetAxis("left", "right");
-        float zAxis = Input.GetAxis("foward", "backward");
+        Vector3 direction = new Vector3(_inputManager.XAxisInput,
+        _entity.Velocity.Y, _inputManager.ZAxisInput).Normalized()
+        * _movementDTO.Speed;
 
-
-        Vector3 direction = new Vector3(xAxis, _entity.Velocity.Y, zAxis) * _movementDTO.Speed;
-        ApplyPlayerCondition(_entity, direction);
+        PlayerInTheAirCondition(_entity);
 
         _entity.Velocity = direction * GetPlayerFriction(_delta, direction);
         _entity.MoveAndSlide();
     }
-
     private float GetPlayerFriction(double _delta, Vector3 _direction)
     {
         float playerFriction = PlayerMoving(_direction) ?
@@ -28,13 +28,8 @@ public partial class MovementComponent : Node
         return playerFriction;
     }
 
-    private static void ApplyPlayerCondition(CharacterBody3D _entity, Vector3 _direction)
+    private static void PlayerInTheAirCondition(CharacterBody3D _entity)
     {
-        if (PlayerMoving(_direction))
-        {
-            _direction.Normalized();
-        }
-
         if (!_entity.IsOnFloor())
         {
             _entity.Velocity = _entity.GetGravity();
