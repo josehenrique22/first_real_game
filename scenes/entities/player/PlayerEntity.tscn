@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://cpguqtvnaqir3"]
+
+[ext_resource type="Texture2D" uid="uid://cca4duhis4r5r" path="res://assets/texture/texture_06.png" id="1_plir6"]
+[ext_resource type="Script" uid="uid://bvbqt7j2qcfk6" path="res://scripts/entities/player/handler/PlayerCharacterController.cs" id="1_t8csi"]
+[ext_resource type="Script" uid="uid://dkqinuh5ioeka" path="res://scripts/entities/player/components/MovementComponent.cs" id="2_3eqqu"]
+[ext_resource type="PackedScene" uid="uid://c5ad4glsfwyek" path="res://scenes/generic_system_scenes/InputManager.tscn" id="3_mcgj1"]
+[ext_resource type="Script" uid="uid://s4txttjmbalw" path="res://scripts/entities/player/dto/MovementDTO.cs" id="3_t8csi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u54eq"]
+albedo_texture = ExtResource("1_plir6")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3eqqu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t8csi"]
+
+[node name="PlayerEntity" type="CharacterBody3D" node_paths=PackedStringArray("_movementComponent") groups=["player"]]
+script = ExtResource("1_t8csi")
+_movementComponent = NodePath("PlayerComponent/MovementComponent")
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_u54eq")
+mesh = SubResource("CapsuleMesh_3eqqu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_t8csi")
+debug_color = Color(0.983399, 0, 0.353391, 0.42)
+
+[node name="TakeDamageArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TakeDamageArea"]
+shape = SubResource("CapsuleShape3D_t8csi")
+debug_color = Color(0.983399, 0, 0.353391, 0.42)
+
+[node name="PlayerComponent" type="Node" parent="."]
+
+[node name="InputManager" parent="PlayerComponent" instance=ExtResource("3_mcgj1")]
+
+[node name="MovementComponent" type="Node" parent="PlayerComponent" node_paths=PackedStringArray("_movementDTO", "_inputManager")]
+script = ExtResource("2_3eqqu")
+_movementDTO = NodePath("MovementDTO")
+_inputManager = NodePath("../InputManager")
+
+[node name="MovementDTO" type="Node" parent="PlayerComponent/MovementComponent"]
+script = ExtResource("3_t8csi")
+Speed = 16.3
+Acceleration = 14.5
+Deceleration = 12.3

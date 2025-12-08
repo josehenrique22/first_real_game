@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0oxirq2clsee"]
+
+[ext_resource type="Texture2D" uid="uid://bwjoueu8pbcu2" path="res://assets/texture/texture_07.png" id="1_4y82y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_an5tg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_14yeo"]
+albedo_texture = ExtResource("1_4y82y")
+
+[sub_resource type="BoxMesh" id="BoxMesh_570nv"]
+
+[node name="BuildingBlock" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_an5tg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_14yeo")
+mesh = SubResource("BoxMesh_570nv")
