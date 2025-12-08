@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1dwjffye31hg"]
+
+[ext_resource type="Script" uid="uid://effuasgq45bo" path="res://scenes/generic_system_scenes/DebugMeshLine.cs" id="1_1nwj4"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_wkqpo"]
+
+[node name="DebugLine" type="Node"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." node_paths=PackedStringArray("_meshPosition")]
+mesh = SubResource("ImmediateMesh_wkqpo")
+script = ExtResource("1_1nwj4")
+_meshPosition = NodePath("")
