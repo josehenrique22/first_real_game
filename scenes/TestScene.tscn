@@ -20,18 +20,18 @@ glow_enabled = true
 
 [node name="TestScene" type="Node"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0.479613, -0.578085, 0.660143, -0.141331, 0.691603, 0.708316, -8, 33, -16)
-light_color = Color(0.567675, 0.544809, 0.509833, 1)
-shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_n77mx")
-
 [node name="BuildingBlock" parent="." instance=ExtResource("1_2gju5")]
 transform = Transform3D(40, 0, 0, 0, 0.5, 0, 0, 0, 40, 0, 0, 0)
 
 [node name="LightContainer" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="LightContainer"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0.479613, -0.578085, 0.660143, -0.141331, 0.691603, 0.708316, -8, 33, -16)
+light_color = Color(0.567675, 0.544809, 0.509833, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="LightContainer"]
+environment = SubResource("Environment_n77mx")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.911619, 0.411037, 0, -0.411037, 0.911619, 0, 17.0056, 28.6314)
