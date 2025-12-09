@@ -7,7 +7,7 @@ public partial class DebugMeshLine : MeshInstance3D
 
     public override void _Process(double delta)
     {
-        GenerateLine(_meshPosition.Position, Vector3.Forward, Colors.Red);
+        GenerateLine(Vector3.Zero, Vector3.Forward * 3, Colors.Red);
     }
 
     private void GenerateLine(Vector3 _pointA, Vector3 _pointB, Color _meshColor)
@@ -29,9 +29,24 @@ public partial class DebugMeshLine : MeshInstance3D
 
             newMeshLine.SurfaceSetColor(_meshColor);
 
+            var lineDebugPosition = MeshSamePositionToPlayer() ?
+                "Position is equal to player" : "Position is not equal to the player";
+
+            Position = _meshPosition.Position;
+            if (!MeshSamePositionToPlayer())
+            {
+                GlobalPosition = _meshPosition.GlobalPosition;
+            }
+
+            GD.Print(lineDebugPosition);
+
             // End Drawing
             newMeshLine.SurfaceEnd();
         }
     }
 
+    private bool MeshSamePositionToPlayer()
+    {
+        return Position == _meshPosition.Position;
+    }
 }

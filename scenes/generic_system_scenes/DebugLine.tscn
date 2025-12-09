@@ -6,7 +6,6 @@
 
 [node name="DebugLine" type="Node"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." node_paths=PackedStringArray("_meshPosition")]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ImmediateMesh_wkqpo")
 script = ExtResource("1_1nwj4")
-_meshPosition = NodePath("")
