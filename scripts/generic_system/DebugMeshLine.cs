@@ -13,6 +13,7 @@ public partial class DebugMeshLine : MeshInstance3D
     public override void _Process(double delta)
     {
         GenerateLine();
+        this.Rotation = _meshPosition.Rotation;
     }
 
     private void GenerateLine()

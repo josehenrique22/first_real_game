@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c1dwjffye31hg"]
 
-[ext_resource type="Script" uid="uid://effuasgq45bo" path="res://scenes/generic_system_scenes/DebugMeshLine.cs" id="1_1nwj4"]
+[ext_resource type="Script" uid="uid://effuasgq45bo" path="res://scripts/generic_system/DebugMeshLine.cs" id="1_1nwj4"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_wkqpo"]
 
