@@ -25,15 +25,10 @@ public partial class MovementComponent : Node
         _entity.Velocity.Y, _inputManager.ZAxisInput).Normalized()
         * _movementDTO.Speed;
 
-        if (_entity.Velocity.X != 0)
-        {   
-            var desiredRotation = _entity.Velocity.X < 0
-            ? Mathf.Cos(-Mathf.Pi)
-            : Mathf.Cos(Mathf.Pi);
-            
-            _entity.RotateY(desiredRotation);
-            GD.Print(_entity.GlobalRotation.Y);
-        }
+        if (_entity.Velocity != Vector3.Zero)
+        {
+            _entity.LookAtFromPosition(_entity.Position, direction);
+        } 
 
         PlayerInTheAirCondition(_entity);
 
