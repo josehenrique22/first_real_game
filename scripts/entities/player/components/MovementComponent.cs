@@ -1,10 +1,10 @@
-using System;
 using DTOS;
 using Godot;
 using InputManagerSystem;
 
 namespace PlayerEntityComponent;
 
+// TODO: Fazer uma interpolação entre as rotação da camera.
 public partial class MovementComponent : Node
 {
     [Export] private MovementDTO _movementDTO;
