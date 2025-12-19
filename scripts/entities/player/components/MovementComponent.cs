@@ -10,31 +10,30 @@ public partial class MovementComponent : Node
     [Export] private MovementDTO _movementDTO;
     [Export] private InputManager _inputManager;
 
-    /*
-        Quando o player se mecher
-            rotacione na direção onde esta se andando.
-
-        Não sei como a rotação funciona para poder aplicar oque quero!
-
-    */
-
-    // TODO: Descubra como funciona rotações apropriadamente e implemente um limite ate onde pode rotacionar (axis Y)
     public void Movement(CharacterBody3D _entity, double _delta)
     {
         Vector3 direction = new Vector3(_inputManager.XAxisInput,
         _entity.Velocity.Y, _inputManager.ZAxisInput).Normalized()
         * _movementDTO.Speed;
-
-        if (_entity.Velocity != Vector3.Zero)
-        {
-            _entity.LookAtFromPosition(_entity.Position, direction);
-        } 
+        
+        PlayerMovementRotation(_entity, direction);
 
         PlayerInTheAirCondition(_entity);
 
         _entity.Velocity = direction * GetPlayerFriction(_delta, direction);
         _entity.MoveAndSlide();
     }
+
+    private static void PlayerMovementRotation(CharacterBody3D _entity, Vector3 direction)
+    {
+        if (PlayerMoving(direction))
+        {
+            // Criar um ponto de destino na direção do movimento
+            Vector3 lookAtTarget = _entity.GlobalPosition + new Vector3(direction.X, 0, direction.Z);
+            _entity.LookAt(lookAtTarget, Vector3.Up);
+        }
+    }
+
     private float GetPlayerFriction(double _delta, Vector3 _direction)
     {
         float playerFriction = PlayerMoving(_direction) ?
